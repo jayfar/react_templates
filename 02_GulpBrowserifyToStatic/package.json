@@ -1,0 +1,28 @@
+{
+  "name": "ReactTest",
+  "version": "0.0.0",
+  "description": "",
+  "main": "s",
+  "author": {
+    "name": "admin",
+    "email": ""
+  },
+  "dependencies": {
+    
+  },
+  "devDependencies": {
+    "async": "^1.5.2",
+    "gulp": "^3.8.1",
+    "gulp-clean": "^0.3.1",
+    "gulp-concat": "^2.2.0",
+    "gulp-concat-css": "^0.1.4",
+    "gulp-minify-css": "^0.3.5",
+    "gulp-processhtml": "0.0.4",
+    "gulp-replace": "^0.3.0",
+    "gulp-uglify": "^0.3.1",
+    "gulp-browserify": "^0.5.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-util": "^3.0.7",
+    "reactify": "^1.1.1"
+  }
+}
