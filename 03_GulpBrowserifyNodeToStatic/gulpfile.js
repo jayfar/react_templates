@@ -32,6 +32,8 @@ gulp.task('copy', function() {
     gulp.src('src/*.png')
       .pipe(gulp.dest('dist'));
 
+    gulp.src('node_modules/react-data-grid/themes/react-data-grid.css')
+      .pipe(gulp.dest('./dist/css'));
 });
 
 

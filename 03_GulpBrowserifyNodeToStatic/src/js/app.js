@@ -16,6 +16,7 @@ var NavItem = ReactBootstrap.NavItem;
 
 var DropdownButton = ReactBootstrap.DropdownButton;
 var MenuItem = ReactBootstrap.MenuItem;
+var NavDropdown = ReactBootstrap.NavDropdown;
 
 var Link = ReactRouter.Link;
 
@@ -26,6 +27,8 @@ var DropdownButton = ReactBootstrap.DropdownButton;
 var MenuItem = ReactBootstrap.MenuItem;
 var Button = ReactBootstrap.Button;
 
+var GridDemo1 = require('./DataGridDemos.js').DataGridDemo1;
+var GridDemo2 = require('./DataGridDemos.js').DataGridDemo2;
 
 var Navigation = React.createClass({
 
@@ -46,14 +49,15 @@ var Navigation = React.createClass({
                     <LinkContainer to={{ pathname: '/twoway'}}>
                     	<NavItem eventKey={2}>Two Way Binding</NavItem>
                     </LinkContainer>
-                    <DropdownButton eventKey={3} title="Dropdown">
-                        <MenuItem eventKey="1">Action</MenuItem>
-                        <MenuItem eventKey="2">Another action</MenuItem>
-                        <MenuItem eventKey="3">Something else here</MenuItem>
+                    <NavDropdown eventKey={3} title="Data Grid" id="basic-nav-dropdown">
+                        <LinkContainer to={{ pathname: '/griddemo1'}}>
+                          <MenuItem eventKey={3.1}>Demo 1</MenuItem>
+                        </LinkContainer>
+                        <LinkContainer to={{ pathname: '/griddemo2'}}>
+                          <MenuItem eventKey={3.2}>Demo 2</MenuItem>
+                        </LinkContainer>
                         <MenuItem divider />
-                        <MenuItem eventKey="4">Separated link</MenuItem>
-                    </DropdownButton>
-                    <Link to={'about'}>About</Link>
+                     </NavDropdown>
                 </Nav>
             </Navbar>
         );
@@ -169,7 +173,8 @@ ReactDOM.render(
       <Route path="home" component={Home}/>
       <Route path="contact" component={ContactUs}/>
       <Route path="twoway" component={TwoWayBinding}/>
-      
+      <Route path="griddemo1" component={GridDemo1}/>
+      <Route path="griddemo2" component={GridDemo2}/>
       <Route path="*" component={CommentBox}/>
     </Route>
   </Router>
