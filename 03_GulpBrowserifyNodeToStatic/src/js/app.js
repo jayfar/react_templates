@@ -29,6 +29,7 @@ var Button = ReactBootstrap.Button;
 
 var GridDemo1 = require('./DataGridDemos.js').DataGridDemo1;
 var GridDemo2 = require('./DataGridDemos.js').DataGridDemo2;
+var GridDemo3 = require('./DataGridDemos.js').DataGridDemo3;
 
 var Navigation = React.createClass({
 
@@ -55,6 +56,9 @@ var Navigation = React.createClass({
                         </LinkContainer>
                         <LinkContainer to={{ pathname: '/griddemo2'}}>
                           <MenuItem eventKey={3.2}>Demo 2</MenuItem>
+                        </LinkContainer>
+                        <LinkContainer to={{ pathname: '/griddemo3'}}>
+                          <MenuItem eventKey={3.3}>Demo 3</MenuItem>
                         </LinkContainer>
                         <MenuItem divider />
                      </NavDropdown>
@@ -175,6 +179,7 @@ ReactDOM.render(
       <Route path="twoway" component={TwoWayBinding}/>
       <Route path="griddemo1" component={GridDemo1}/>
       <Route path="griddemo2" component={GridDemo2}/>
+      <Route path="griddemo3" component={GridDemo3}/>
       <Route path="*" component={CommentBox}/>
     </Route>
   </Router>

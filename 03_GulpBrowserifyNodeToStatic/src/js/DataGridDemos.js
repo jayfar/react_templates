@@ -3,7 +3,7 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var ReactBootstrap = require('react-bootstrap');
 var ReactDataGrid = require('react-data-grid');
-
+var Button = ReactBootstrap.Button;
 var exports = module.exports = {};
 
 
@@ -156,5 +156,98 @@ exports.DataGridDemo2 = React.createClass({
     rowsCount={rows.length}
     minHeight={500}
     rowRenderer={RowRenderer}/>);
+  }
+});
+
+
+
+
+
+////////// Hands on table demo
+
+
+
+exports.DataGridDemo3 = React.createClass({
+  componentDidMount: function()
+  {
+     var data = [
+        ["", "Kia", "Nissan", "Toyota", "Honda"],
+        ["2008", 10, 11, 12, 13],
+        ["2009", 20, 11, 14, 13],
+        ["2010", 30, 15, 12, 13],
+        ["2008", 10, 11, 12, 13],
+        ["2009", 20, 11, 14, 13],
+        ["2010", 30, 15, 12, 13],
+        ["2008", 10, 11, 12, 13],
+        ["2009", 20, 11, 14, 13],
+        ["2010", 30, 15, 12, 13],
+        ["2008", 10, 11, 12, 13],
+        ["2009", 20, 11, 14, 13],
+        ["2010", 30, 15, 12, 13],
+        ["2010", 30, 15, 12, 13],
+        ["2008", 10, 11, 12, 13],
+        ["2009", 20, 11, 14, 13],
+        ["2010", 30, 15, 12, 13],
+        ["2008", 10, 11, 12, 13],
+        ["2009", 20, 11, 14, 13],
+        ["2010", 30, 15, 12, 13],
+        ["2008", 10, 11, 12, 13],
+        ["2009", 20, 11, 14, 13],
+        ["2010", 30, 15, 12, 13],
+        ["2008", 10, 11, 12, 13],
+        ["2009", 20, 11, 14, 13],
+        ["2010", 30, 15, 12, 13],
+        ["2008", 10, 11, 12, 13],
+        ["2009", 20, 11, 14, 13],
+        ["2010", 30, 15, 12, 13],
+        ["2008", 10, 11, 12, 13],
+        ["2009", 20, 11, 14, 13],
+        ["2010", 30, 15, 12, 13],
+        ["2008", 10, 11, 12, 13],
+        ["2009", 20, 11, 14, 13],
+        ["2010", 30, 15, 12, 13],
+        ["2008", 10, 11, 12, 13],
+        ["2009", 20, 11, 14, 13],
+        ["2010", 30, 15, 12, 13],
+        ["2008", 10, 11, 12, 13],
+        ["2009", 20, 11, 14, 13],
+        ["2010", 30, 15, 12, 13],
+        ["2008", 10, 11, 12, 13],
+        ["2009", 20, 11, 14, 13],
+        ["2010", 30, 15, 12, 13],
+        ["2008", 10, 11, 12, 13],
+        ["2009", 20, 11, 14, 13],
+        ["2010", 30, 15, 12, 13],
+        ["2008", 10, 11, 12, 13],
+        ["2009", 20, 11, 14, 13]
+    ];
+
+    var container = document.getElementById('example');
+    this.hot = new Handsontable(container,
+    {
+        data: data,
+        stretchH: 'all',
+        rowHeaders: true,
+        colHeaders: true,
+        contextMenu: true,
+        height: 420,
+        mergeCells: [
+            {row: 1, col: 1, rowspan: 2, colspan: 3},
+        ]
+    });
+  },
+  saveClick: function() {
+    var data = this.hot.getData();
+    alert(JSON.stringify(data));
+  },
+  render: function() {
+    return  (
+        <div>
+        <h1>HandOnTable Demo</h1>
+        <a target="_blank" href="https://docs.handsontable.com/0.21.0/tutorial-introduction.html">Docs</a>
+        <div id="example"></div>
+        <Button bsStyle="info" onClick={this.saveClick}>Save</Button>
+        </div>
+    );
   }
 });
