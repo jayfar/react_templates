@@ -34,6 +34,9 @@ gulp.task('copy', function() {
 
     gulp.src('node_modules/react-data-grid/themes/react-data-grid.css')
       .pipe(gulp.dest('./dist/css'));
+
+    gulp.src('node_modules/react-tag-input/example/reactTags.css')
+      .pipe(gulp.dest('./dist/css'));
       
     gulp.src('src/css/*.css')
       .pipe(gulp.dest('./dist/css'));
