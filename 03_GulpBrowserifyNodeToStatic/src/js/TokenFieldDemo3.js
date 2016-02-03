@@ -56,6 +56,7 @@ exports.TokenFieldDemo3 = React.createClass({
             <TokenField
               options={this.options}
               allowAnyEntry={false}
+              dropdownOnClick={false}
               initialSelections={this.state.selected}
               tagListModifiedHandler={this.selectedTokensChanged}
               />

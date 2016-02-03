@@ -14,11 +14,11 @@ var exports = module.exports = {};
 exports.TokenField = React.createClass({
    getDefaultProps: function()
     {
-        console.log("getDefaultProps");
         return {
             initialSelections: [],
             options: [],
             allowAnyEntry: true,
+            dropdownOnClick: false,
             tagListModifiedHandler: function(array) {},
         };
     },
@@ -35,13 +35,10 @@ exports.TokenField = React.createClass({
     componentWillReceiveProps: function(newProps)
     {
         this.parseInputTagList();
-        //console.log("PropsUpdated: " + JSON.stringify(newProps));
-        //this.setState(newState);
     },
     componentWillMount: function()
     {
 
-      console.log("component will mount");
     },
     mapArrayToObjectList: function(array) {
         return array.map(function(name) {
@@ -85,8 +82,6 @@ exports.TokenField = React.createClass({
     // Either comes in as a string from direct keyboard entry or {id / name object} from list selection
     handleSelect: function(value, combobox)
     {
-        console.log("Handle select:");
-        console.log(value);
         if (typeof value === 'string')
         {
             value = {
@@ -110,7 +105,6 @@ exports.TokenField = React.createClass({
     // Called each time a character is typed
     handleInput: function(userInput)
     {
-        console.log(userInput);
         this.setState(
         {
             input: userInput,
@@ -134,14 +128,22 @@ exports.TokenField = React.createClass({
     filterTags: function(userInput)
     {
         if (userInput === '')
+        {
             return this.setState(
             {
                 options: []
             });
-        var filter = new RegExp('^' + userInput, 'i');
+        }
+
+        var filter = null;
+        if(userInput != null)
+        {
+          filter = new RegExp('^' + userInput, 'i');
+        }
         var filteredNames = this.optionsAsArrayOfObjs.filter(function(state)
         {
-            return filter.test(state.name); // || filter.test(state.id);
+            if(userInput == null) return true;
+            else return filter.test(state.name); // || filter.test(state.id);
         }).filter(function(state)
         {
             return this.state.selected
@@ -152,7 +154,7 @@ exports.TokenField = React.createClass({
                 .indexOf(state.name) === -1
         }.bind(this))
 
-        
+
         this.setState(
         {
             options: filteredNames
@@ -173,7 +175,10 @@ exports.TokenField = React.createClass({
     },
     clicked: function()
     {
-        console.log("Show dropdown");
+        if(this.props.dropdownOnClick == true)
+        {
+          this.filterTags(null);
+        }
     },
     render: function()
     {
