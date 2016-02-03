@@ -33,6 +33,7 @@ var GridDemo3 = require('./DataGridDemos.js').DataGridDemo3;
 
 var TokenFieldDemo = require('./TokenFieldDemo.js').TokenFieldDemo;
 var TokenFieldDemo2 = require('./TokenFieldDemo2.js').TokenFieldDemo2;
+var TokenFieldDemo3 = require('./TokenFieldDemo3.js').TokenFieldDemo3;
 
 var Navigation = React.createClass({
 
@@ -72,7 +73,9 @@ var Navigation = React.createClass({
                         <LinkContainer to={{ pathname: '/tokenfielddemo2'}}>
                           <MenuItem eventKey={4.2}>Token Field Demo 2</MenuItem>
                         </LinkContainer>
-                        
+                        <LinkContainer to={{ pathname: '/tokenfielddemo3'}}>
+                          <MenuItem eventKey={4.3}>Token Field Demo 3</MenuItem>
+                        </LinkContainer>
                         <MenuItem divider />
                      </NavDropdown>
                 </Nav>
@@ -195,6 +198,7 @@ ReactDOM.render(
       <Route path="griddemo3" component={GridDemo3}/>
       <Route path="tokenfielddemo" component={TokenFieldDemo}/>
       <Route path="tokenfielddemo2" component={TokenFieldDemo2}/>
+      <Route path="tokenfielddemo3" component={TokenFieldDemo3}/>
       
       
       <Route path="*" component={CommentBox}/>
