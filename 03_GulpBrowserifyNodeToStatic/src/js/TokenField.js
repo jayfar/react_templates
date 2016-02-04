@@ -18,6 +18,7 @@ exports.TokenField = React.createClass({
             initialSelections: [],
             options: [],
             placeholder: "Enter tokens here",
+            enteredCommasSplitIntoTags: false,
             allowAnyEntry: true,
             dropdownOnClick: false,
             tagListModifiedHandler: function(array) {},
@@ -87,15 +88,28 @@ exports.TokenField = React.createClass({
     {
         if (typeof value === 'string')
         {
-            value = {
-                id: value,
-                name: value
-            };
             if (this.props.allowAnyEntry == false)
                 return;
+
+            var valueArray = [value];
+            if(this.props.enteredCommasSplitIntoTags == true)
+            {
+                valueArray = value.split(',');
+            }
+            value = valueArray.map(function(v)
+            {
+                return {
+                    id: v,
+                    name: v
+                };
+            });
+        }
+        else
+        {
+            value = [value];
         }
 
-        var selected = uniq(this.state.selected.concat([value]))
+        var selected = uniq(this.state.selected.concat(value))
         this.setState(
         {
             selected: selected,
