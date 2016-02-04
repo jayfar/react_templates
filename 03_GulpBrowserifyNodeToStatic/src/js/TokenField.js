@@ -17,6 +17,7 @@ exports.TokenField = React.createClass({
         return {
             initialSelections: [],
             options: [],
+            placeholder: "Enter tokens here",
             allowAnyEntry: true,
             dropdownOnClick: false,
             tagListModifiedHandler: function(array) {},
@@ -38,7 +39,8 @@ exports.TokenField = React.createClass({
     },
     componentWillMount: function()
     {
-
+        // Used so we don't show the list if an item was just removed (basically igore that click).
+        this.itemJustRemoved = false;
     },
     mapArrayToObjectList: function(array) {
         return array.map(function(name) {
@@ -74,6 +76,7 @@ exports.TokenField = React.createClass({
 
     handleRemove: function(value)
     {
+        this.itemJustRemoved = true;
         var selectedOptions = uniq(without(this.state.selected, value))
         this.handleChange(selectedOptions)
     },
@@ -175,9 +178,16 @@ exports.TokenField = React.createClass({
     },
     clicked: function()
     {
+        // Ignore this click if user is removing an item.
+        if(this.itemJustRemoved == true)
+        {
+            this.itemJustRemoved = false;
+            return; 
+        }
+
         if(this.props.dropdownOnClick == true)
         {
-          this.filterTags(null);
+            this.filterTags(null);
         }
     },
     render: function()
@@ -202,7 +212,7 @@ exports.TokenField = React.createClass({
                 onSelect={this.handleSelect}
                 onRemove={this.handleRemove}
                 selected={this.state.selected}
-                placeholder='Enter tokens here'
+                placeholder={this.props.placeholder}
               />
 
           </div>
