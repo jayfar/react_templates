@@ -5,10 +5,14 @@ var uglify = require('gulp-uglify');
 var gutil = require('gulp-util');
 var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
+var babelify = require('babelify');
 
+// Note: Need "babel-preset-react" to use 'react' in babelify below
 
 gulp.task('browserify', function() {
-    return browserify('src/js/app.js', {transform:'reactify', debug: false}) 
+    return browserify('src/js/app.js', {debug: false})
+        //.transform('reactify', {debug: false})
+        .transform('babelify', {presets: ['es2015', 'react']}) 
         .bundle()
         .pipe(source('app.js')) // gives streaming vinyl file object
         .pipe(buffer()) // <----- convert from streaming to buffered vinyl file object
@@ -17,7 +21,9 @@ gulp.task('browserify', function() {
 });
 
 gulp.task('browserify_debug', function() {
-    return browserify('src/js/app.js', {transform:'reactify', debug: true}) // ignore:['react', 'react-dom', 'jQuery', 'react-bootstrap', 'react-router', 'react-router-bootstrap']
+    return browserify('src/js/app.js', {debug: true}) //, {transform:'reactify', debug: true}) // ignore:['react', 'react-dom', 'jQuery', 'react-bootstrap', 'react-router', 'react-router-bootstrap']
+        //.transform('reactify', {debug: true})
+        .transform('babelify', {presets: ['es2015', 'react']})
         .bundle()
         .pipe(source('app.js')) // gives streaming vinyl file object
         .pipe(buffer()) // <----- convert from streaming to buffered vinyl file object

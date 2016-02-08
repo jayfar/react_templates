@@ -35,6 +35,8 @@ var TokenFieldDemo = require('./TokenFieldDemo.js').TokenFieldDemo;
 var TokenFieldDemo2 = require('./TokenFieldDemo2.js').TokenFieldDemo2;
 var TokenFieldDemo3 = require('./TokenFieldDemo3.js').TokenFieldDemo3;
 
+var FormDemo1 = require('./formcomponents/FormDemo1.js');
+
 var Navigation = React.createClass({
 
     render: function() {
@@ -77,6 +79,9 @@ var Navigation = React.createClass({
                           <MenuItem eventKey={4.3}>Token Field Demo 3</MenuItem>
                         </LinkContainer>
                         <MenuItem divider />
+                        <LinkContainer to={{ pathname: '/formdemo1'}}>
+                          <MenuItem eventKey={4.4}>Form Demo 1</MenuItem>
+                        </LinkContainer>
                      </NavDropdown>
                 </Nav>
             </Navbar>
@@ -199,7 +204,7 @@ ReactDOM.render(
       <Route path="tokenfielddemo" component={TokenFieldDemo}/>
       <Route path="tokenfielddemo2" component={TokenFieldDemo2}/>
       <Route path="tokenfielddemo3" component={TokenFieldDemo3}/>
-      
+      <Route path="formdemo1" component={FormDemo1}/>
       
       <Route path="*" component={CommentBox}/>
     </Route>

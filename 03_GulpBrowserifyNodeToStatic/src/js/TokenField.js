@@ -26,7 +26,7 @@ exports.TokenField = React.createClass({
     },
     getInitialState: function()
     {
-        this.parseInputTagList();
+        this.parseInputTagList(this.props.options);
         return {
             input: '',
             loading: false,
@@ -36,11 +36,25 @@ exports.TokenField = React.createClass({
     },
     componentWillReceiveProps: function(newProps)
     {
-        this.parseInputTagList();
+        
+        var selProps = [];
+        if($.isArray(newProps.initialSelections) && newProps.initialSelections.length > 0)
+        {
+            selProps = newProps.initialSelections;
+            if(selProps.length == 1 && selProps[0] === "")
+            {
+                selProps = [];
+            }
+        }
+
+        this.setState(
+        {
+            selected: this.mapArrayToObjectList(selProps),
+        })
     },
     componentWillMount: function()
     {
-        // Used so we don't show the list if an item was just removed (basically igore that click).
+        // Used so we don't show the list if an item was just removed (basically ignore that click).
         this.itemJustRemoved = false;
     },
     mapArrayToObjectList: function(array) {
@@ -58,8 +72,15 @@ exports.TokenField = React.createClass({
         );
     },
     
-    parseInputTagList: function() {
-        this.optionsAsArrayOfObjs = this.mapArrayToObjectList(this.props.options);
+    parseInputTagList: function(theProps) {
+        if($.isArray(theProps) && theProps.length > 0)
+        {
+            this.optionsAsArrayOfObjs = this.mapArrayToObjectList(theProps);
+        }
+        else
+        {
+             this.optionsAsArrayOfObjs = [];
+        }
     },
     
     handleChange: function(value)
@@ -74,12 +95,21 @@ exports.TokenField = React.createClass({
             this.props.tagListModifiedHandler(this.mapObjectListToArray(value));
         }
     },
-
     handleRemove: function(value)
     {
         this.itemJustRemoved = true;
         var selectedOptions = uniq(without(this.state.selected, value))
-        this.handleChange(selectedOptions)
+
+        this.setState(
+        {
+            selected: selectedOptions,
+            options: []
+        })
+
+        if (this.props.tagListModifiedHandler instanceof Function) 
+        { 
+            this.props.tagListModifiedHandler(this.mapObjectListToArray(selectedOptions));
+        }
     },
 
     // Called each time a selected or entered value is converted to a tag 
